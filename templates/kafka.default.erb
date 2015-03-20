@@ -1,53 +1,19 @@
 # Note: This file is managed by Puppet.
 
-# whether to allow init.d script to start a kafka broker ("yes", "no")
-KAFKA_START=<%= @enabled ? 'yes' : 'no' %>
-
-# User and group to run as
-KAFKA_USER=kafka
-KAFKA_GROUP=kafka
-KAFKA_CONFIG=/etc/kafka
+ENABLED=<%= @enable ? 'yes' : 'no' %>
 
 <% if @java_home -%>
 JAVA_HOME="<%= @java_home %>"
 <% end -%>
-
-# Extra Java options
-<% if @java_opts -%>
-JAVA_OPTS="<%= @java_opts %>"
-<% else -%>
-#JAVA_OPTS=""
-<% end -%>
-
-# Extra classpath entries
-<% if @classpath -%>
-CLASSPATH="<%= @classpath %>"
-<% else -%>
-#CLASSPATH=""
-<% end -%>
-
-KAFKA_NOFILES_ULIMIT=<%= @nofiles_ulimit %>
-
-# The default JMX_PORT for Kafka Brokers is 9999.
-# Set JMX_PORT to something else to override this.
-JMX_PORT=<%= @jmx_port %>
-#KAFKA_JMX_OPTS=${KAFKA_JMX_OPTS:="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"}
-
-<% if @jvm_performance_opts -%>
-KAFKA_JVM_PERFORMANCE_OPTS="<%= @jvm_performance_opts %>"
-<% else -%>
-# Default GC settings.
-#KAFKA_JVM_PERFORMANCE_OPTS="-server -XX:+UseCompressedOops -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:+DisableExplicitGC"
-# LinkedIn recommended GC settings.  See: https://kafka.apache.org/081/ops.html
-# You need Java 7 u51 or greater to use the G1 GC.
-#KAFKA_JVM_PERFORMANCE_OPTS="-server -XX:PermSize=48m -XX:MaxPermSize=48m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35"
-<% end -%>
-
-# Memory sizes, and logging configuration
 <% if @heap_opts -%>
 KAFKA_HEAP_OPTS="<%= @heap_opts %>"
-<% else -%>
-#KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"
 <% end -%>
-#KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:${KAFKA_CONFIG}/log4j.properties"
-#KAFKA_OPTS=""
+<% if @gc_log_enabled -%>
+GC_LOG_ENABLED=<%= @gc_log_enabled ? 'true' : 'false' %>
+<% end -%>
+<% if @jmx_port -%>
+JMX_PORT=<%= @jmx_port %>
+<% end -%>
+<% if @classpath -%>
+CLASSPATH="<%= @classpath %>"
+<% end -%>

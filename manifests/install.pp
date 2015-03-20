@@ -1,8 +1,6 @@
 class kafka::install {
 
-  $kafka_package = "confluent-kafka-${kafka::scala_version}"
-
-  package { $kafka_package:
+  package { 'confluent-kafka':
     ensure => $kafka::version,
   }
 

@@ -1,12 +1,23 @@
-class kafka::server::service(
-  $service_enable,
-  $service_ensure,
-) {
+class kafka::server::service {
+
+  case $kafka::server::enable {
+    true: {
+      $ensure = 'running'
+      $enable = true
+    }
+    default: {
+      $ensure = 'stopped'
+      $enable = false
+    }
+  }
 
   service { 'kafka':
-    ensure  => $service_ensure,
-    enable  => $service_enable,
-    require => Class['kafka::server::config'],
+    ensure  => $ensure,
+    enable  => $enable,
+    require => [
+      Class['kafka::install'],
+      Class['kafka::server::config'],
+    ],
   }
 
 }

@@ -1,6 +1,6 @@
-class kafka(
-  $version = $kafka::params::version,
-) inherits kafka::params {
+class confluent_kafka(
+  $version = $confluent_kafka::params::version,
+) inherits confluent_kafka::params {
 
   validate_string($version)
 
@@ -8,6 +8,6 @@ class kafka(
     fail('This module only supports Kafka >= 0.8.2')
   }
 
-  contain kafka::install
+  contain confluent_kafka::install
 
 }

@@ -1,4 +1,4 @@
-class kafka::server::params {
+class confluent_kafka::server::params {
 
   $enable                              = true
 

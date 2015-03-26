@@ -1,24 +1,24 @@
-class kafka::server(
+class confluent_kafka::server(
 
-  $enable                              = $kafka::server::params::enable,
+  $enable                              = $confluent_kafka::server::params::enable,
 
   # Essential Kafka configuration
-  $broker_id                           = $kafka::server::params::broker_id,
-  $log_dirs                            = $kafka::server::params::log_dirs,
-  $zookeeper_connect                   = $kafka::server::params::zookeeper_connect,
+  $broker_id                           = $confluent_kafka::server::params::broker_id,
+  $log_dirs                            = $confluent_kafka::server::params::log_dirs,
+  $zookeeper_connect                   = $confluent_kafka::server::params::zookeeper_connect,
 
   # Other Kafka configuration
-  $server_properties                   = $kafka::server::params::server_properties,
+  $server_properties                   = $confluent_kafka::server::params::server_properties,
 
   # Operational configuration
-  $java_home                           = $kafka::server::params::java_home,
-  $heap_opts                           = $kafka::server::params::heap_opts,
-  $gc_log_enabled                      = $kafka::server::params::gc_log_enabled,
-  $jmx_port                            = $kafka::server::params::jmx_port,
-  $classpath                           = $kafka::server::params::classpath,
-  $kafka_log_directory                 = $kafka::server::params::kafka_log_directory,
+  $java_home                           = $confluent_kafka::server::params::java_home,
+  $heap_opts                           = $confluent_kafka::server::params::heap_opts,
+  $gc_log_enabled                      = $confluent_kafka::server::params::gc_log_enabled,
+  $jmx_port                            = $confluent_kafka::server::params::jmx_port,
+  $classpath                           = $confluent_kafka::server::params::classpath,
+  $kafka_log_directory                 = $confluent_kafka::server::params::kafka_log_directory,
 
-) inherits kafka::server::params {
+) inherits confluent_kafka::server::params {
 
   validate_bool($enable)
 
@@ -60,11 +60,11 @@ class kafka::server(
 
   validate_absolute_path($kafka_log_directory)
 
-  include kafka::user
+  include confluent_kafka::user
 
-  contain kafka::server::config
-  contain kafka::server::service
+  contain confluent_kafka::server::config
+  contain confluent_kafka::server::service
 
-  Class['kafka::install'] -> Class['kafka::server::config']
+  Class['confluent_kafka::install'] -> Class['confluent_kafka::server::config']
 
 }

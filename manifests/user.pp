@@ -1,4 +1,4 @@
-class kafka::user {
+class confluent_kafka::user {
 
   group { 'kafka':
     ensure => present,

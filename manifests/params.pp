@@ -1,4 +1,4 @@
-class kafka::params {
+class confluent_kafka::params {
 
   $version = 'installed'
 

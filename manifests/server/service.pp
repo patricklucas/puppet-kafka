@@ -1,6 +1,6 @@
-class kafka::server::service {
+class confluent_kafka::server::service {
 
-  case $kafka::server::enable {
+  case $confluent_kafka::server::enable {
     true: {
       $ensure = 'running'
       $enable = true
@@ -15,8 +15,8 @@ class kafka::server::service {
     ensure  => $ensure,
     enable  => $enable,
     require => [
-      Class['kafka::install'],
-      Class['kafka::server::config'],
+      Class['confluent_kafka::install'],
+      Class['confluent_kafka::server::config'],
     ],
   }
 

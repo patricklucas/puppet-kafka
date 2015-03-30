@@ -5,7 +5,7 @@ class confluent_kafka::server::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0444',
-    source => 'puppet:///modules/confluent_kafka/kafka.conf',
+    source => template('confluent_kafka/kafka.conf.erb'),
   }
 
   file { '/etc/default/kafka':

@@ -29,7 +29,7 @@ class confluent_kafka::server::config {
     owner  => 'root',
     group  => 'root',
     mode   => '0444',
-    content => template('confluent_kafka/log4j.properties.erb'),
+    source => 'puppet:///modules/confluent_kafka/log4j.properties',
   }
 
   file { $confluent_kafka::server::log_dirs:

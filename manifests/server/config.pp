@@ -24,14 +24,6 @@ class confluent_kafka::server::config {
     content => template('confluent_kafka/server.properties.erb'),
   }
 
-  file { '/etc/kafka/log4j.properties':
-    ensure => 'file',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0444',
-    source => 'puppet:///modules/confluent_kafka/log4j.properties',
-  }
-
   file { $confluent_kafka::server::log_dirs:
     ensure  => 'directory',
     owner   => 'kafka',

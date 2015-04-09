@@ -17,8 +17,8 @@ class confluent_kafka::server(
   $jmx_port                            = $confluent_kafka::server::params::jmx_port,
   $classpath                           = $confluent_kafka::server::params::classpath,
   $kafka_log_directory                 = $confluent_kafka::server::params::kafka_log_directory,
-  $kafka_log4j_config                  = $confluent_kafka::server::params::kafka_log4j_config
-  $jvm_performance_opts                = $confluent_kafka::server::params::jvm_performance_opts
+  $kafka_log4j_config                  = $confluent_kafka::server::params::kafka_log4j_config,
+  $jvm_performance_opts                = $confluent_kafka::server::params::jvm_performance_opts,
 
 ) inherits confluent_kafka::server::params {
 
